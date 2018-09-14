@@ -8,6 +8,17 @@ public class Herramienta {
 	private double Precio;
 	private String Especificacion;
 	private String LugarOrigen;
+	
+	public Herramienta(int codHerramienta, String fechaAdquisicion, double precio, String especificacion,
+			String lugarOrigen) {
+		super();
+		CodHerramienta = codHerramienta;
+		FechaAdquisicion = fechaAdquisicion;
+		Precio = precio;
+		Especificacion = especificacion;
+		LugarOrigen = lugarOrigen;
+	}
+	
 	public int getCodHerramienta() {
 		return CodHerramienta;
 	}

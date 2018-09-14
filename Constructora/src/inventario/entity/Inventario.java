@@ -5,6 +5,12 @@ public class Inventario {
 
 	private int CodInventario;
 	private String Fecha;
+	
+	public Inventario(int codInventario, String fecha) {
+		super();
+		CodInventario = codInventario;
+		Fecha = fecha;
+	}
 	public int getCodInventario() {
 		return CodInventario;
 	}

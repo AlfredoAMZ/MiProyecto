@@ -7,6 +7,15 @@ public class Material {
 	private double Dimensiones;
 	private double Precio;
 	private String LugarOrigen;
+	
+	public Material(int codMaterial, double cantidad, double dimensiones, double precio, String lugarOrigen) {
+		super();
+		CodMaterial = codMaterial;
+		Cantidad = cantidad;
+		Dimensiones = dimensiones;
+		Precio = precio;
+		LugarOrigen = lugarOrigen;
+	}
 	public int getCodMaterial() {
 		return CodMaterial;
 	}

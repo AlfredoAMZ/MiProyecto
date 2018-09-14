@@ -8,10 +8,6 @@ import view.InputTypes;
 
 public class Menu {
 
-	/****************************
-	 * Encabezado del menú *
-	 ****************************/
-
 	public static int encabezado(Scanner scanner) {
 		int opcion;
 
@@ -35,18 +31,10 @@ public class Menu {
 		}
 	}
 
-	/****************************
-	 * Opciones del menú 
-	 * @throws SQLException 
-	 * @throws ClassNotFoundException *
-	 ****************************/
-
 	public static void menú(Scanner scanner) throws ClassNotFoundException, SQLException {
 		boolean salir = false;
 		
 		Conexion conexión = new Conexion("root","","Tienda");
-		CategoriasIO categoríasIO = new CategoriasIO(conexión, scanner);
-		ProductosIO productosIO = new ProductosIO(conexión, scanner);
 		
 		while (!salir) {
 			switch (encabezado(scanner)) {
@@ -54,17 +42,9 @@ public class Menu {
 				salir = true;
 				break;
 			case 1:
-				try {
-					categoria.view.Menu.menú(scanner, categoríasIO);
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-				break;
+			
 			case 2:
-			{
-				producto.view.Menu.menú(scanner, productosIO);
-				break;
-			}
+			
 			case 3:
 			{
 				

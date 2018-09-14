@@ -2,22 +2,31 @@ package obrero.entity;
 
 public class Obrero {
 	
-	private int CodCliente;
-	private int CICliente;
+	private int CodObrero;
+	private int CI;
 	private String NombreCompleto;
 	private String FechadeNacimiento;
 	private int Telefono;
-	public int getCodCliente() {
-		return CodCliente;
+	
+	public Obrero(int CodObrero, int CI, String nombreCompleto, String fechadeNacimiento, int telefono) {
+		super();
+		this.CodObrero = CodObrero;
+		this.CI = CI;
+		NombreCompleto = nombreCompleto;
+		FechadeNacimiento = fechadeNacimiento;
+		Telefono = telefono;
+	}
+	public int CodObrero() {
+		return CodObrero;
 	}
 	public void setCodCliente(int codCliente) {
-		CodCliente = codCliente;
+		CodObrero = codCliente;
 	}
-	public int getCICliente() {
-		return CICliente;
+	public int getCI() {
+		return CI;
 	}
-	public void setCICliente(int cICliente) {
-		CICliente = cICliente;
+	public void setCI(int CI) {
+		this.CI = CI;
 	}
 	public String getNombreCompleto() {
 		return NombreCompleto;
@@ -39,7 +48,7 @@ public class Obrero {
 	}
 	@Override
 	public String toString() {
-		return "Obrero [CodCliente=" + CodCliente + ", CICliente=" + CICliente + ", NombreCompleto=" + NombreCompleto
+		return "Obrero [CodObrero=" + CodObrero + ", CI=" + CI + ", NombreCompleto=" + NombreCompleto
 				+ ", FechadeNacimiento=" + FechadeNacimiento + ", Telefono=" + Telefono + "]";
 	}
 	
