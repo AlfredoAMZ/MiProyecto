@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 import control.Conexion;
+import control.Consultas;
 import view.InputTypes;
 
 public class Menu {
@@ -18,14 +19,15 @@ public class Menu {
 			System.out.println("2. Obtener Cotizacion ");
 			System.out.println("3. Sacar Recibo ");
 			System.out.println("4. Revisar Inventario");
-			System.out.println("5. Ver Ganancias");
+			System.out.println("5. Modificar Inventario");
+			System.out.println("6. Ver Ganancias");
 			
 			System.out.println("0. Salir");
 			System.out.println();
 
 			opcion = InputTypes.readInt("¿Su opción? ", scanner);
 
-			if (opcion >= 0 && opcion <= 5) {
+			if (opcion >= 0 && opcion <= 6) {
 				return opcion;
 			}
 		}
@@ -35,6 +37,7 @@ public class Menu {
 		boolean salir = false;
 		
 		Conexion conexión = new Conexion("root","","Tienda");
+		Consultas consultas = new Consultas(conexión, scanner);
 		
 		while (!salir) {
 			switch (encabezado(scanner)) {
@@ -42,9 +45,15 @@ public class Menu {
 				salir = true;
 				break;
 			case 1:
-			
+			{
+			consultas.RegistroCliente();
+			break;
+			}
 			case 2:
-			
+			{
+			consultas.ObtenerCotizacion();
+			break;	
+			}
 			case 3:
 			{
 				
@@ -52,10 +61,15 @@ public class Menu {
 			}
 			case 4:
 			{
-				
+			consultas.ObtenerInventario();	
 			break;
 			}
 			case 5:
+			{
+				
+			break;
+			}
+			case 6:
 			{
 				
 			break;
