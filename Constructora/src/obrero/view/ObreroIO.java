@@ -10,15 +10,15 @@ public class ObreroIO {
 	
 	public static Obrero ingresar(Scanner scanner){
 		int CodObrero =
-				InputTypes.readInt("Ingresar Codigo Inventario :", scanner);
+				InputTypes.readInt("Ingresar Codigo de Obrero :", scanner);
 		int CI =
-				InputTypes.readInt("Ingresar Codigo Inventario :", scanner);
+				InputTypes.readInt("Ingresar CI:", scanner);
 		String NombreCompleto =
-				InputTypes.readString("Fecha de revision del inventario :", scanner);
+				InputTypes.readString("Nombre Completo", scanner);
 		String FechadeNacimiento =
-				InputTypes.readString("Fecha de revision del inventario :", scanner);
+				InputTypes.readString("Fecha de nacimiento :", scanner);
 		int Telefono =
-				InputTypes.readInt("Ingresar Codigo Inventario :", scanner);
+				InputTypes.readInt("Telefono:", scanner);
 		
 		return new 
 				Obrero (CodObrero, CI, NombreCompleto, FechadeNacimiento, Telefono);

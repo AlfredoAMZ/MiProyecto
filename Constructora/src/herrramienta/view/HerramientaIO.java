@@ -10,17 +10,21 @@ public class HerramientaIO {
 	public static Herramienta ingresar(Scanner scanner){
 		int codHerramienta =
 				InputTypes.readInt("Ingresar Codigo Herramienta :", scanner);
+		int codInventario =
+				InputTypes.readInt("Ingresar Codigo Inventario :", scanner);
+		String Nombre=
+				InputTypes.readString("Nombre :", scanner);
 		String FechaAdquisicion =
-				InputTypes.readString("Fecha de Adquisicion de la Herramienta :", scanner);
+				InputTypes.readString("Fecha de Adquisicion :", scanner);
 		double precio = 
-				InputTypes.readDouble("Ingresar precio de la Herramienta :", scanner);
+				InputTypes.readDouble("Precio :", scanner);
 		String Especificacion =
 				InputTypes.readString("Descripcion :", scanner);
 		String LugarOrigen =
-				InputTypes.readString("Lugar de origen de la herramienta :", scanner);
+				InputTypes.readString("Lugar de origen:", scanner);
 		
 		return new 
-			Herramienta (codHerramienta, FechaAdquisicion, precio, Especificacion, LugarOrigen);
+			Herramienta (codHerramienta, codInventario,Nombre, FechaAdquisicion, precio, Especificacion, LugarOrigen);
 		
 	}
 	
