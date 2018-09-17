@@ -36,7 +36,7 @@ public class Menu {
 	public static void menú(Scanner scanner) throws ClassNotFoundException, SQLException {
 		boolean salir = false;
 		
-		Conexion conexión = new Conexion("root","","Tienda");
+		Conexion conexión = new Conexion("root","","constructora");
 		Consultas consultas = new Consultas(conexión, scanner);
 		
 		while (!salir) {
