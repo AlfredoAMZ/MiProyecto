@@ -13,21 +13,25 @@ public class Menu {
 		int opcion;
 
 		while (true) {
-			System.out.println("Ingrese una opcion: ");
-			System.out.println("------------------- ");
+			System.out.println("*******BIENVENIDO******* ");
+			System.out.println("---Ingrese una opcion--- ");
+			System.out.println("------------------------ ");
 			System.out.println("1. Registrar Cliente");
-			System.out.println("2. Obtener Cotizacion ");
-			System.out.println("3. Sacar Recibo ");
-			System.out.println("4. Revisar Inventario");
-			System.out.println("5. Modificar Inventario");
-			System.out.println("6. Ver Ganancias");
+			System.out.println("2. Registrar Herramienta");
+			System.out.println("3. Registrar Material");
+			System.out.println("4. Registrar Obrero");
+			System.out.println("5. Obtener Cotizacion ");
+			System.out.println("6. Sacar Recibo ");
+			System.out.println("7. Revisar Inventario");
+			System.out.println("8. Modificar Inventario");
+			System.out.println("9. Ver Ganancias");
 			
 			System.out.println("0. Salir");
 			System.out.println();
 
 			opcion = InputTypes.readInt("¿Su opción? ", scanner);
 
-			if (opcion >= 0 && opcion <= 6) {
+			if (opcion >= 0 && opcion <= 9) {
 				return opcion;
 			}
 		}
@@ -51,25 +55,40 @@ public class Menu {
 			}
 			case 2:
 			{
-			consultas.ObtenerCotizacion();
+			consultas.RegistroHerramientas();
 			break;	
 			}
 			case 3:
 			{
-				
+			consultas.RegistroMaterial();
 			break;
 			}
 			case 4:
 			{
-			consultas.ObtenerInventario();	
+			consultas.RegistroObrero();
 			break;
 			}
 			case 5:
 			{
-				
+			consultas.ObtenerCotizacion();	
 			break;
 			}
 			case 6:
+			{
+				
+			break;
+			}
+			case 7:
+			{
+			consultas.ObtenerInventario();
+			break;
+			}
+			case 8:
+			{
+				
+			break;
+			}
+			case 9:
 			{
 				
 			break;

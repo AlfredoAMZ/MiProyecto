@@ -8,9 +8,12 @@ import cliente.entity.Cliente;
 import cliente.view.ClienteIO;
 import cotizacion.entity.Cotizacion;
 import herramienta.entity.Herramienta;
+import herrramienta.view.HerramientaIO;
 import inventario.entity.Inventario;
 import material.entity.Material;
+import material.view.MaterialIO;
 import obrero.entity.Obrero;
+import obrero.view.ObreroIO;
 import view.InputTypes;
 
 public class Consultas {
@@ -26,7 +29,7 @@ public class Consultas {
 
 	public void RegistroCliente() {
 		Cliente cliente = ClienteIO.ingresar(scanner);
-		String sql = "Insert into Cliente (CodCliente, CICliente, NombreCompleto) " + "values(?,?,?)";
+		String sql = "Insert into Cliente (CodCliente, 'C.I', 'Nombre Completo') " + "values(?,?,?)";
 		try {
 			conexión.consulta(sql);
 			conexión.getSentencia().setInt(1, cliente.getCodCliente());
@@ -168,9 +171,54 @@ public class Consultas {
 			
 		Obrero = new Obrero(CodObrero, CI, NombreCompletoO,FechadeNacimiento,Telefono);
 		System.out.println(Obrero);
-			
-	
-				
 	}
+		
+	public void RegistroHerramientas() {
+		Herramienta herramienta = HerramientaIO.ingresar(scanner);
+		String sql1 = "Insert into Herramienta (CodHerramienta, FechaAdquisicion, Precio,Especificacion,LugarOrigen) " + "values(?,?,?,?,?)";
+		try {
+		conexión.consulta(sql1);
+		conexión.getSentencia().setInt(1, herramienta.getCodHerramienta());
+		conexión.getSentencia().setString(2, herramienta.getFechaAdquisicion());
+		conexión.getSentencia().setDouble(3, herramienta.getPrecio());
+		conexión.getSentencia().setString(4, herramienta.getEspecificacion());
+		conexión.getSentencia().setString(5, herramienta.getLugarOrigen());
+		conexión.modificacion();
+		} catch (SQLException e) {
+		System.out.println(e.getSQLState());
+		}
+	}
+		
+	public void RegistroMaterial() {
+		Material material = MaterialIO.ingresar(scanner);
+		String sql1 = "Insert into Material (CodMaterial, Cantidad, Dimensiones,Precio,LugarOrigen) " + "values(?,?,?,?,?)";
+		try {
+		conexión.consulta(sql1);
+		conexión.getSentencia().setInt(1, material.getCodMaterial());
+		conexión.getSentencia().setDouble(2, material.getCantidad());
+		conexión.getSentencia().setDouble(3, material.getDimensiones());
+		conexión.getSentencia().setDouble(4, material.getPrecio());
+		conexión.getSentencia().setString(5, material.getLugarOrigen());
+		conexión.modificacion();
+		} catch (SQLException e) {
+		System.out.println(e.getSQLState());
+		}
+	}
+	public void RegistroObrero() {
+		Obrero obrero = ObreroIO.ingresar(scanner);
+		String sql1 = "Insert into Obrero (CodObrero, CI, NombreCompleto, FechadeNacimiento, Telefono) " + "values(?,?,?,?,?)";
+		try {
+		conexión.consulta(sql1);
+		conexión.getSentencia().setInt(1, obrero.CodObrero());
+		conexión.getSentencia().setInt(2, obrero.getCI());
+		conexión.getSentencia().setString(3, obrero.getNombreCompleto());
+		conexión.getSentencia().setString(4, obrero.getFechadeNacimiento());
+		conexión.getSentencia().setInt(5, obrero.getTelefono());
+		conexión.modificacion();
+		} catch (SQLException e) {
+		System.out.println(e.getSQLState());
+		}
+	}
+
 
 }
