@@ -20,8 +20,8 @@ public class Menu {
 			System.out.println("2. Registrar Herramienta");
 			System.out.println("3. Registrar Material");
 			System.out.println("4. Registrar Obrero");
-			System.out.println("5. Obtener Cotizacion ");
-			System.out.println("6. Sacar Recibo ");
+			System.out.println("5. Registrar Cotizacion ");
+			System.out.println("6. Sacar Recibo de la Cotizacion ");
 			System.out.println("7. Revisar Inventario");
 			System.out.println("8. Modificar Inventario");
 			System.out.println("9. Ver Ganancias");
@@ -51,49 +51,61 @@ public class Menu {
 			case 1:
 			{
 			consultas.RegistroCliente();
+			salir = true;
 			break;
 			}
 			case 2:
 			{
 			consultas.RegistroHerramientas();
+			salir = true;
 			break;	
 			}
 			case 3:
 			{
 			consultas.RegistroMaterial();
+			salir = true;
 			break;
 			}
 			case 4:
 			{
 			consultas.RegistroObrero();
+			salir = true;
 			break;
 			}
 			case 5:
 			{
-			consultas.ObtenerCotizacion();	
+			consultas.SacarCotizacion();	
+			salir = true;
 			break;
 			}
 			case 6:
 			{
-				
+			consultas.ObtenerRecibo();	
+			salir = true;
 			break;
 			}
 			case 7:
 			{
 			consultas.ObtenerInventario();
+			salir = true;
 			break;
 			}
 			case 8:
 			{
-				
+			consultas.ModificarInventario();
+			salir = true;
 			break;
 			}
 			case 9:
 			{
-				
+			System.out.println("No pudimos hacer este ING :( ");
+			salir = true;
 			break;
 			}
 		}
+			System.out.println();
+			System.out.println("***DEBE VOLVER A INICIAR EL PROGRAMA PARA REALIZAR OTRO SERVICIO***");
+			System.out.println();
 		conexión.close();
 	}
 }

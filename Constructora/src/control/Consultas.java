@@ -7,9 +7,9 @@ import java.util.Scanner;
 import cliente.entity.Cliente;
 import cliente.view.ClienteIO;
 import cotizacion.entity.Cotizacion;
+import cotizacion.view.CotizacionIO;
 import herramienta.entity.Herramienta;
 import herrramienta.view.HerramientaIO;
-import inventario.entity.Inventario;
 import material.entity.Material;
 import material.view.MaterialIO;
 import obrero.entity.Obrero;
@@ -94,97 +94,102 @@ public class Consultas {
 	
 	public void ObtenerInventario() throws SQLException {
 		ResultSet resultSet;
-		Inventario Inventario;
-		String Fecha;
-		int CodInventario = InputTypes.readInt("Cód Inventario: ", scanner);
-		String sql = "SELECT i.`Cod Inventario`,m.`Cod Material`,h.`Cod Herramienta` From material m INNER JOIN inventario iON m.`Cod Material` = i.`Cod Inventario` INNER JOIN herramienta hON h.`Cod Herramienta` = i.`Cod Inventario`";
-		conexión.consulta(sql);
-		conexión.getSentencia().setInt(1, CodInventario );
-		resultSet = conexión.resultado();
-		resultSet.next();
-		Fecha = resultSet.getString("Fecha Ultima Revision");
-		Inventario = new Inventario(CodInventario, Fecha);
-		System.out.println(Inventario);
 
+		String sql = "SELECT i.`Cod Inventario`,m.`Cod Material`,m. Nombre, m.Cantidad, h.`Cod Herramienta` , H.NombreH, H.Especificacion From material m INNER JOIN inventario i ON m.`Cod Material` = i.`Cod Inventario` INNER JOIN herramienta h ON h.`Cod Herramienta` = i.`Cod Inventario`";
+		conexión.consulta(sql);
+		resultSet = conexión.resultado();
 		
+		while (resultSet.next())
+		{
+			System.out.print("--Codigo de Inventario: ");
+			System.out.println(resultSet.getInt("Cod Inventario"));
+			System.out.print("-Codigo de Material: ");
+			System.out.println(resultSet.getInt("Cod Material"));
+			System.out.print("Nombre: ");
+			System.out.println(resultSet.getString("Nombre"));
+			System.out.print("Cantidad Existente: ");
+			System.out.println(resultSet.getDouble("Cantidad"));
+			System.out.print("-Codigo de Herrramienta: ");
+			System.out.println(resultSet.getInt("Cod Herramienta"));
+			System.out.print("Nombre: ");
+			System.out.println(resultSet.getString("NombreH"));
+			System.out.print("Especificacion: ");
+			System.out.println(resultSet.getString("Especificacion"));
+		}
+		
+		resultSet.close();
 	}
 	
-	public void ObtenerCotizacion() throws SQLException {
-		ResultSet resultSet;
-		Cotizacion Cotizacion;
-		String Fecha;
-		int NumCotizacion = InputTypes.readInt("Cod Cotizacion: ", scanner);
-		String sql = "select * from Cotizacion where Numero Cotizacion = ?";
-		conexión.consulta(sql);
-		conexión.getSentencia().setInt(1, NumCotizacion );
-		resultSet = conexión.resultado();
-		resultSet.next();
-		Fecha = resultSet.getString("Fecha");
-		Cotizacion = new Cotizacion(NumCotizacion, Fecha);
-		System.out.println(Cotizacion);
-
-		Cliente cliente;
-		int CodCliente;
-		int CICliente;
-		String NombreCompleto;
-
-		sql = "select * from cliente where Numero Cotizacion = ?";
-		conexión.consulta(sql);
-		conexión.getSentencia().setInt(1, NumCotizacion);
-		resultSet = conexión.resultado();
-		resultSet.next();
-		CodCliente = resultSet.getInt("Cod Cliente");
-		CICliente = resultSet.getInt("C.I");
-		NombreCompleto = resultSet.getString("Nombre Completo");
-			
-		cliente = new Cliente(CodCliente, CICliente, NombreCompleto);
-		System.out.println(cliente);
-			
-		Material material;
-		int CodMaterial;
-		int CodInventario;
-		String Nombre;
-		Double cantidad;
-		String dimensiones;
-		Double precio;
-		String LugarOrigen;
-
-		sql = "select * from material where Numero Cotizacion = ?";
-		conexión.consulta(sql);
-		conexión.getSentencia().setInt(1, NumCotizacion);
-		resultSet = conexión.resultado();
-		resultSet.next();
-		CodMaterial = resultSet.getInt("Cod Material");
-		CodInventario= resultSet.getInt("Cod Inventario");
-		Nombre=resultSet.getString("Nombre");
-		cantidad = resultSet.getDouble("Cantidad");
-		dimensiones = resultSet.getString("Dimensiones");
-		precio = resultSet.getDouble("Precio");
-		LugarOrigen = resultSet.getString("Lugar de Origen");
-				
-		material = new Material(CodMaterial, CodInventario,Nombre, cantidad, dimensiones, precio, LugarOrigen);
-		System.out.println(material);
+	public void ObtenerRecibo() throws SQLException {
 		
-		Obrero Obrero;
-		int CodObrero;
-		int CI;
-		String NombreCompletoO;
-		String FechadeNacimiento;
-		int Telefono;
+		ResultSet resultSet;
 
-		sql = "select * from obrero where Numero Cotizacion = ?";
+		String sql = "SELECT c1.`Numero Cotizacion`, c.CodCliente , c.`Nombre Completo` , c.`C.I` , o.`Cod Obrero` , o.`Nombre CompletoO`, o.CI , o.`Numero de Telefono` , m.`Cod Material` , m.Nombre, m.Cantidad, m.Precio  FROM cliente c INNER JOIN cotizacion c1 ON c.CodCliente = c1.`Numero Cotizacion` INNER JOIN obreros o ON O.`Cod Obrero` = C1.`Numero Cotizacion` INNER JOIN material m ON m.`Cod Material`= c1.`Numero Cotizacion`";
 		conexión.consulta(sql);
-		conexión.getSentencia().setInt(1, NumCotizacion);
 		resultSet = conexión.resultado();
-		resultSet.next();
-		CodObrero = resultSet.getInt("Cod Cliente");
-		CI = resultSet.getInt("CI");
-		NombreCompletoO = resultSet.getString("Nombre Completo");
-		FechadeNacimiento = resultSet.getString("Fecha de Nacimiento");
-		Telefono = resultSet.getInt("Numero de Telefono");
-			
-		Obrero = new Obrero(CodObrero, CI, NombreCompletoO,FechadeNacimiento,Telefono);
-		System.out.println(Obrero);
+		
+		while (resultSet.next())
+		{
+			System.out.print("--Numero de Cotizacion: ");
+			System.out.println(resultSet.getInt("Numero Cotizacion"));
+			System.out.print("-Codigo del Cliente: ");
+			System.out.println(resultSet.getInt("CodCliente"));
+			System.out.print("Nombre del Cliente: ");
+			System.out.println(resultSet.getString("Nombre Completo"));
+			System.out.print("CI: ");
+			System.out.println(resultSet.getInt("C.I"));
+			System.out.print("-Codigo del Obrero Asignado para el Trabajo: ");
+			System.out.println(resultSet.getString("Cod Obrero"));
+			System.out.print("Nombre del Obrero: ");
+			System.out.println(resultSet.getString("Nombre CompletoO"));
+			System.out.print("CI: ");
+			System.out.println(resultSet.getInt("CI"));
+			System.out.print("Numero de Telefono: ");
+			System.out.println(resultSet.getInt("Numero de Telefono"));
+			System.out.print("-Codigo del Material que se usará en el trabajo:  ");
+			System.out.println(resultSet.getInt("Cod Material"));
+			System.out.print("Material: ");
+			System.out.println(resultSet.getString("Nombre"));
+			System.out.print("Cantidad: ");
+			System.out.println(resultSet.getDouble("Cantidad"));
+			System.out.print("Precio: ");
+			System.out.println(resultSet.getDouble("Precio"));
+		}
+		
+		resultSet.close();
+	}
+	public void SacarCotizacion() {
+		Cotizacion cotizacion = CotizacionIO.ingresar(scanner);
+		String sql1 = "INSERT INTO cotizacion (`Numero Cotizacion`, `Cod Cliente`, `Cod Obrero`, `Cod Materiales`, Fecha)" + "values(?,?,?,?,?)";
+		try {
+		conexión.consulta(sql1);
+		conexión.getSentencia().setInt(1, cotizacion.getCodMaterial());
+		conexión.getSentencia().setInt(2, cotizacion.getCodCliente());
+		conexión.getSentencia().setInt(3, cotizacion.getCodObrero());
+		conexión.getSentencia().setInt(4, cotizacion.getCodMaterial());
+		conexión.getSentencia().setString(5, cotizacion.getFecha());
+		conexión.modificacion();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	public void ModificarInventario(){
+		
+		try {
+		conexión.consulta("UPDATE inventario i SET i.`Cod Herramientas` = ? , i.`Cod Material` =?, i.`Fecha Ultima revision` = ? WHERE i.`Cod Inventario` LIKE ? ");
+		int CodI = InputTypes.readInt("Ingrese el Codigo del Inventario a Modificar:", scanner);
+		int CodM = InputTypes.readInt("Ingrese el nuevo codigo de Material:", scanner);
+		int CodHe = InputTypes.readInt("Ingrese el nuevo codigo de Herramienta:", scanner);
+		String fecha = InputTypes.readString("Fecha de esta Modificacion:", scanner);
+		
+		conexión.getSentencia().setInt(1, CodHe);
+		conexión.getSentencia().setInt(2, CodM);
+		conexión.getSentencia().setString(3, fecha);
+		conexión.getSentencia().setInt(4, CodI);
+		conexión.modificacion();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 }
